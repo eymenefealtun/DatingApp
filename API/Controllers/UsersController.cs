@@ -16,7 +16,7 @@ public class UsersController : Controller
         _context = context;
     }
 
-    [HttpGet] // Http request
+    [HttpGet] // endpoit  // Http request
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers() // Task represents an asynchronous operation that can retun a value.
     {
         return await _context.Users.ToListAsync();
