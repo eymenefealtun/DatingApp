@@ -44,6 +44,7 @@ public class AccountController : BaseApiController
             Username = user.UserName,
             Token = _tokenService.CreateToken(user),
         };
+
     }
 
     [HttpPost("login")]
