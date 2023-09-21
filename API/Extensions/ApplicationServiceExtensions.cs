@@ -19,6 +19,12 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             // builder.Services.AddTransient(); // this AddTransient method's Service has a short lifetime // Token service is going to created and disposed of within the request as soon as it used and finished with
             // builder.Services.AddSingleton();  // create a instance of a controller and it never disposed until the application has closed down 
+
+            services.AddScoped<IUserRepository, UserRepository>();  //this is going to  make this injectiable into our usercontroller
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
             return services;
         }
 
