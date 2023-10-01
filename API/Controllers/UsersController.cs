@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using API.Data;
 using API.DTOs;
 using API.Entities;
@@ -41,6 +42,23 @@ public class UsersController : BaseApiController
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
         return await _userRepository.GetMemberAsync(username);
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+    {
+        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        // var username = User.Identity.Name; //another way of doing the above thing
+        var user = await _userRepository.GetUserByUsernameAsync(username);
+
+        if (user == null) return NotFound();
+
+        _mapper.Map(memberUpdateDto, user); //this line of code is going to update the user. Note: nothing is saved into database here yet just updated the user from memberUpdateDto.
+
+
+        if (await _userRepository.SaveAllAsync()) return NoContent(); //returns 201 code
+
+        return BadRequest("Failed to update user"); 
     }
 
 }
