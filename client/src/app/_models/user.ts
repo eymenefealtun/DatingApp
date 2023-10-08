@@ -1,6 +1,7 @@
 export interface User {
     username: string;
     token: string;
+    photoUrl: string;
 }
 
 // let data: number | string = 42; // this variable can be string or number
@@ -12,7 +13,7 @@ export interface User {
 
 
 // export interface Car {
-//     color: string; 
+//     color: string;
 //     model: string;
 //     topSpeed?: number;
 // }
